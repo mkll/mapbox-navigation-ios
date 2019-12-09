@@ -57,8 +57,8 @@ public typealias UnpackCompletionHandler = (_ numberOfTiles: UInt64, _ error: Er
  Each result produced by the directions object is stored in a `Route` object. Depending on the `RouteOptions` object you provide, each route may include detailed information suitable for turn-by-turn directions, or it may include only high-level information such as the distance, estimated travel time, and name of each leg of the trip. The waypoints that form the request may be conflated with nearby locations, as appropriate; the resulting waypoints are provided to the closure.
  */
 public class NavigationDirections: Directions {
-    public override init(accessToken: String? = nil, host: String? = nil) {
-        super.init(accessToken: accessToken, host: host)
+    public override init(host: String? = nil) {
+        super.init(host: host)
     }
     
     /**

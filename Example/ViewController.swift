@@ -154,21 +154,6 @@ class ViewController: UIViewController {
     // MARK: Gesture Recognizer Handlers
 
     @objc func didLongPress(tap: UILongPressGestureRecognizer) {
-        guard let mapView = mapView, tap.state == .began else { return }
-
-        if let annotation = mapView.annotations?.last, waypoints.count > 2 {
-            mapView.removeAnnotation(annotation)
-        }
-
-        if waypoints.count > 1 {
-            waypoints = Array(waypoints.dropFirst())
-        }
-        
-        let coordinates = mapView.convert(tap.location(in: mapView), toCoordinateFrom: mapView)
-        // Note: The destination name can be modified. The value is used in the top banner when arriving at a destination.
-        let waypoint = Waypoint(coordinate: coordinates, name: "Dropped Pin #\(waypoints.endIndex + 1)")
-        waypoints.append(waypoint)
-
         requestRoute()
     }
 
@@ -193,11 +178,12 @@ class ViewController: UIViewController {
     // MARK: - Public Methods
     // MARK: Route Requests
     func requestRoute() {
-        guard waypoints.count > 0 else { return }
-        guard let mapView = mapView else { return }
 
-        let userWaypoint = Waypoint(location: mapView.userLocation!.location!, heading: mapView.userLocation?.heading, name: "User location")
-        waypoints.insert(userWaypoint, at: 0)
+        let wp1 = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 49.418204, longitude: 8.676581), name: "Mapbox")
+        let wp2 = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 49.409465, longitude: 8.692803), name: "White House")
+        let waypoints: [Waypoint] = [
+            wp1, wp2
+        ]
 
         let options = NavigationRouteOptions(waypoints: waypoints)
 
@@ -348,6 +334,7 @@ class ViewController: UIViewController {
         mapView.navigationMapViewDelegate = self
         mapView.userTrackingMode = .follow
         mapView.logoView.isHidden = true
+        mapView.setCenter(CLLocationCoordinate2D(latitude: 49.418204, longitude: 8.676581), animated: false)
 
         let singleTap = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(tap:)))
         mapView.gestureRecognizers?.filter({ $0 is UILongPressGestureRecognizer }).forEach(singleTap.require(toFail:))
