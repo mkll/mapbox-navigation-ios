@@ -8,16 +8,14 @@ extension MGLVectorTileSource {
      This array contains multiple entries for a composited source. This property is set to `nil` for non-Mapbox-hosted tile sets.
      */
     var tileSetIdentifiers: [String]? {
-        guard let configurationURL = configurationURL, configurationURL.scheme == "mapbox" else {
-            return nil
-        }
-        return configurationURL.host!.components(separatedBy: ",")
+        return configurationURL?.host?.components(separatedBy: ",")
     }
     
     /**
      A Boolean value indicating whether the tile source is a supported version of the Mapbox Streets source.
      */
     var isMapboxStreets: Bool {
+        return true
         let tileSetIdentifiers = self.tileSetIdentifiers
         return tileSetIdentifiers?.contains("mapbox.mapbox-streets-v8") ?? false ||
             tileSetIdentifiers?.contains("mapbox.mapbox-streets-v7") ?? false

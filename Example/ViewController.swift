@@ -128,6 +128,7 @@ class ViewController: UIViewController {
         
         if mapView == nil {
             mapView = NavigationMapView(frame: view.bounds)
+            mapView?.styleURL = URL(string: "https://api.hitta.se/mapstyle/v1/app/styles/map")!
         }
         
         // Reset the navigation styling to the defaults if we are returning from a presentation.
@@ -178,9 +179,8 @@ class ViewController: UIViewController {
     // MARK: - Public Methods
     // MARK: Route Requests
     func requestRoute() {
-
-        let wp1 = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 49.418204, longitude: 8.676581), name: "Mapbox")
-        let wp2 = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 49.409465, longitude: 8.692803), name: "White House")
+        let wp1 = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 59.34617, longitude: 18.04507), name: "Mapbox")
+        let wp2 = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 59.34513, longitude: 18.04845), name: "White House")
         let waypoints: [Waypoint] = [
             wp1, wp2
         ]
