@@ -7,6 +7,7 @@ import Turf
 /**
  `NavigationMapView` is a subclass of `MGLMapView` with convenience functions for adding `Route` lines to a map.
  */
+@objc(MBNavigationMapView)
 open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     // MARK: Class Constants
     
